@@ -1,0 +1,32 @@
+name: Push to nolov5
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push_to_nolo:
+    runs-on: ubuntu-latest
+    env:
+      ACCESS_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
+      CI_COMMIT_MESSAGE: Update vorp_metabolism-lua
+      CI_COMMIT_AUTHOR: LezdCS
+      CI_COMMIT_EMAIL: '${{ secrets.EMAIL }}'
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Push to nolov5
+        run: |
+          shopt -s extglob
+          git clone https://${{ACCESS_TOKEN}}@github.com/Nolosha/nolov5.git
+          cp -r !(nolov5) nolov5/resources/[local]/[nolosha]/vorp_metabolism-lua/
+          cd nolov5
+          git config user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config user.email "${{ env.CI_COMMIT_EMAIL }}"    
+          git add .
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
+      
