@@ -21,7 +21,7 @@ jobs:
       - name: Push to nolov5
         run: |
           shopt -s extglob
-          git clone https://${{ACCESS_TOKEN}}@github.com/Nolosha/nolov5.git
+          git clone https://${{env.ACCESS_TOKEN}}@github.com/Nolosha/nolov5.git
           cp -r !(nolov5) nolov5/resources/[local]/[nolosha]/vorp_metabolism-lua/
           cd nolov5
           git config user.name "${{ env.CI_COMMIT_AUTHOR }}"
