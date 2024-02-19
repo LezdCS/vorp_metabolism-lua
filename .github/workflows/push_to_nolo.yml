@@ -22,8 +22,8 @@ jobs:
         run: |
           shopt -s extglob
           git clone https://${{env.ACCESS_TOKEN}}@github.com/Nolosha/nolov5.git
-          mkdir -p nolov5/resources/[local]/[nolosha]/vorp_metabolism-lua/
-          cp -r !(nolov5) nolov5/resources/[local]/[nolosha]/vorp_metabolism-lua/
+          mkdir -p nolov5/resources/[vorp]/vorp_metabolism-lua/
+          cp -r !(nolov5) nolov5/resources/[vorp]/vorp_metabolism-lua/
           cd nolov5
           git config user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config user.email "${{ env.CI_COMMIT_EMAIL }}"    
